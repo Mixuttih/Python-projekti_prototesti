@@ -46,53 +46,61 @@ def vaara_vastaus(i):
 print("Welcome to 'Who Wants to be a Millionaire?' Airport Edition!")
 username = input('Enter your username: ')
 
+game_over = False
+
+
 print(f"Alright, {username}! Your first question is...")
+while game_over == False:
+    #Haetaan kysymykseen data
+    question = kysymys()
 
-#Haetaan kysymykseen data
-question = kysymys()
+    #Haetaan oikeaan vastaukseen data
+    answer = oikea_vastaus(question)
 
-#Haetaan oikeaan vastaukseen data
-answer = oikea_vastaus(question)
+    #Haetaan väärä vastaus kolme kertaa
+    wrong_answer1 = vaara_vastaus(answer)
+    wrong_answer2 = vaara_vastaus(answer)
+    wrong_answer3 = vaara_vastaus(answer)
 
-#Haetaan väärä vastaus kolme kertaa
-wrong_answer1 = vaara_vastaus(answer)
-wrong_answer2 = vaara_vastaus(answer)
-wrong_answer3 = vaara_vastaus(answer)
+    #Luodaan lista vastauksista
+    vastauslista = [answer, wrong_answer1, wrong_answer2, wrong_answer3]
+    #Sekoitetaan vastaukset
+    random.shuffle(vastauslista)
 
-#Luodaan lista vastauksista
-vastauslista = [answer, wrong_answer1, wrong_answer2, wrong_answer3]
-#Sekoitetaan vastaukset
-random.shuffle(vastauslista)
+    #Printataan kysymys ja vastaukset
+    print(f"Which country is {question} located in?")
 
-#Printataan kysymys ja vastaukset
-print(f"Which country is {question} located in?")
+    print(f"A. {vastauslista[0]}")
+    print(f"B. {vastauslista[1]}")
+    print(f"C. {vastauslista[2]}")
+    print(f"D. {vastauslista[3]}")
 
-print(f"A. {vastauslista[0]}")
-print(f"B. {vastauslista[1]}")
-print(f"C. {vastauslista[2]}")
-print(f"D. {vastauslista[3]}")
+    #Käyttäjän vastauskenttä
+    vastaus = input("Your answer: ")
 
-#Käyttäjän vastauskenttä
-vastaus = input("Your answer: ")
-
-#Tarkastetaan vastasiko käyttäjä oikein
-if vastaus == "A":
-    if vastauslista[0] == answer:
-        print("Correct answer!")
-    else:
-        print(f"Wrong answer, the correct answer was {answer}.")
-elif vastaus == "B":
-    if vastauslista[1] == answer:
-        print("Correct answer!")
-    else:
-        print(f"Wrong answer, the correct answer was {answer}.")
-elif vastaus == "C":
-    if vastauslista[2] == answer:
-        print("Correct answer!")
-    else:
-        print(f"Wrong answer, the correct answer was {answer}.")
-elif vastaus == "D":
-    if vastauslista[3] == answer:
-        print("Correct answer!")
-    else:
-        print(f"Wrong answer, the correct answer was {answer}.")
+    #Tarkastetaan vastasiko käyttäjä oikein
+    if vastaus == "A":
+        if vastauslista[0] == answer:
+            print("Correct answer!")
+        else:
+            print(f"Wrong answer, the correct answer was {answer}.")
+            game_over = True
+    elif vastaus == "B":
+        if vastauslista[1] == answer:
+            print("Correct answer!")
+        else:
+            print(f"Wrong answer, the correct answer was {answer}.")
+            game_over = True
+    elif vastaus == "C":
+        if vastauslista[2] == answer:
+            print("Correct answer!")
+        else:
+            print(f"Wrong answer, the correct answer was {answer}.")
+            game_over = True
+    elif vastaus == "D":
+        if vastauslista[3] == answer:
+            print("Correct answer!")
+        else:
+            print(f"Wrong answer, the correct answer was {answer}.")
+            game_over = True
+print("Game over")
