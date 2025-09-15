@@ -46,10 +46,13 @@ def vaara_vastaus(i):
 print("Welcome to 'Who Wants to be a Millionaire?' Airport Edition!")
 username = input('Enter your username: ')
 
+#Muuttuja joka määrittää kysytäänkö kysymyksiä
 game_over = False
 
 
 print(f"Alright, {username}! Your first question is...")
+
+#Loop joka kysyy kysymyksiä kunnes yksi menee väärin
 while game_over == False:
     #Haetaan kysymykseen data
     question = kysymys()
