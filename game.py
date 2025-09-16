@@ -74,7 +74,8 @@ while game_over == False:
     random.shuffle(vastauslista)
 
     #Printataan kysymys ja vastaukset
-    round += 1
+    current_round += 1
+    print(f"This question is worth {100 * current_round}!")
     print(f"Which country is {question} located in?")
 
     print(f"A. {vastauslista[0]}")
@@ -83,7 +84,7 @@ while game_over == False:
     print(f"D. {vastauslista[3]}")
 
     #Käyttäjän vastauskenttä
-    vastaus = input("Your answer: ")
+    vastaus = input("Your answer: ").upper()
 
     #Tarkastetaan vastasiko käyttäjä oikein
     if vastaus == "A":
@@ -97,6 +98,7 @@ while game_over == False:
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
+
     elif vastaus == "B":
         if vastauslista[1] == answer:
             print("Correct answer!")
@@ -107,6 +109,7 @@ while game_over == False:
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
+
     elif vastaus == "C":
         if vastauslista[2] == answer:
             print("Correct answer!")
@@ -117,6 +120,7 @@ while game_over == False:
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
+
     elif vastaus == "D":
         if vastauslista[3] == answer:
             print("Correct answer!")
@@ -127,7 +131,9 @@ while game_over == False:
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
+    #Jos pelaaja syöttää virheellisen vastauksen
     else:
         print("Error")
         game_over = True
-print("Game over")
+
+print("Game over, you lose, good day.")
