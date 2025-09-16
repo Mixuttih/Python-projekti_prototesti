@@ -48,7 +48,8 @@ username = input('Enter your username: ')
 
 #Muuttuja joka määrittää kysytäänkö kysymyksiä
 game_over = False
-
+money = 0
+round = 0
 
 print(f"Alright, {username}! Your first question is...")
 
@@ -71,6 +72,7 @@ while game_over == False:
     random.shuffle(vastauslista)
 
     #Printataan kysymys ja vastaukset
+    round += 1
     print(f"Which country is {question} located in?")
 
     print(f"A. {vastauslista[0]}")
@@ -85,25 +87,44 @@ while game_over == False:
     if vastaus == "A":
         if vastauslista[0] == answer:
             print("Correct answer!")
+            reward = 100 * round
+            money = money + reward
+            print(f"You have earned ${reward}! You now have ${money}!")
+            print("Your next question is...")
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
     elif vastaus == "B":
         if vastauslista[1] == answer:
             print("Correct answer!")
+            reward = 100 * round
+            money = money + reward
+            print(f"You have earned ${reward}! You now have ${money}!")
+            print("Your next question is...")
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
     elif vastaus == "C":
         if vastauslista[2] == answer:
             print("Correct answer!")
+            reward = 100 * round
+            money = money + reward
+            print(f"You have earned ${reward}! You now have ${money}!")
+            print("Your next question is...")
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
     elif vastaus == "D":
         if vastauslista[3] == answer:
             print("Correct answer!")
+            reward = 100 * round
+            money = money + reward
+            print(f"You have earned ${reward}! You now have ${money}!")
+            print("Your next question is...")
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
+    else:
+        print("Error")
+        game_over = True
 print("Game over")
