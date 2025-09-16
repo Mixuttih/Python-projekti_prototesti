@@ -13,27 +13,26 @@ yhteys = mysql.connector.connect(
 
 #Helppo kysymys: Haetaan tietokannasta kysyttävän lentokentän nimi randomisti
 def helppo_kysymys():
-    sql = f"SELECT name FROM airport ORDER BY RAND() LIMIT 1"
+    sql = f"SELECT name, ident FROM airport ORDER BY RAND() LIMIT 1"
+    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
-    for rivi in tulos:
-        return rivi
-    return None
+    return tulos
 
 #Haetaan kysymyksen lentokenttää vastaavan maan nimi
 def helppo_oikea_vastaus(i):
-    sql = f"SELECT name FROM country WHERE iso_country in(SELECT iso_country FROM airport WHERE name = '{i}')"
+    sql = f"SELECT name, iso_country FROM country WHERE iso_country in(SELECT iso_country FROM airport WHERE ident = '{i}')"
+    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
-    for rivi in tulos:
-        return rivi
-    return None
+    return tulos
 
 #Haetaan maa joka ei ole oikea vastaus
 def helppo_vaara_vastaus(i):
-    sql = f"SELECT name FROM country WHERE NOT name = '{i}' ORDER BY RAND() LIMIT 1"
+    sql = f"SELECT name FROM country WHERE NOT iso_country = '{i}' ORDER BY RAND() LIMIT 1"
+    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -43,27 +42,26 @@ def helppo_vaara_vastaus(i):
 
 #Keskivaikea kysymys: Haetaan tietokannasta kysyttävän lentokentän nimi randomisti
 def keski_kysymys():
-    sql = f"SELECT name FROM airport ORDER BY RAND() LIMIT 1"
+    sql = f"SELECT name, ident FROM airport ORDER BY RAND() LIMIT 1"
+    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
-    for rivi in tulos:
-        return rivi
-    return None
+    return tulos
 
 #Haetaan kysymyksen lentokenttää vastaavan ICAO -koodi
 def keski_oikea_vastaus(i):
-    sql = f"SELECT ident FROM airport WHERE name = '{i}'"
+    sql = f"SELECT ident FROM airport WHERE ident = '{i}'"
+    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
-    for rivi in tulos:
-        return rivi
-    return None
+    return tulos
 
 #Haetaan ICAO -koodi joka ei ole oikea vastaus
 def keski_vaara_vastaus(i):
     sql = f"SELECT ident FROM airport WHERE NOT ident = '{i}' ORDER BY RAND() LIMIT 1"
+    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -74,26 +72,25 @@ def keski_vaara_vastaus(i):
 #Vaikea kysymys: Haetaan ICAO -koodi
 def vaikea_kysymys():
     sql = f"SELECT ident FROM airport ORDER BY RAND() LIMIT 1"
+    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
-    for rivi in tulos:
-        return rivi
-    return None
+    return tulos
 
 #Haetaan kysymyksen koodia vastaavan lentokentän nimi
 def vaikea_oikea_vastaus(i):
     sql = f"SELECT name FROM airport WHERE ident = '{i}'"
+    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
-    for rivi in tulos:
-        return rivi
-    return None
+    return tulos
 
 #Haetaan lentokentän nimi joka ei ole oikea vastaus
 def vaikea_vaara_vastaus(i):
-    sql = f"SELECT name FROM airport WHERE NOT name = '{i}' ORDER BY RAND() LIMIT 1"
+    sql = f"SELECT name FROM airport WHERE NOT ident = '{i}' ORDER BY RAND() LIMIT 1"
+    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -122,37 +119,37 @@ while game_over == False:
         question = helppo_kysymys()
 
         #Haetaan oikeaan vastaukseen data
-        answer = helppo_oikea_vastaus(str(question))
+        answer = helppo_oikea_vastaus(str(question[1]))
 
         #Haetaan väärä vastaus kolme kertaa
-        wrong_answer1 = helppo_vaara_vastaus(answer)
-        wrong_answer2 = helppo_vaara_vastaus(answer)
-        wrong_answer3 = helppo_vaara_vastaus(answer)
+        wrong_answer1 = helppo_vaara_vastaus(str(answer[1]))
+        wrong_answer2 = helppo_vaara_vastaus(str(answer[1]))
+        wrong_answer3 = helppo_vaara_vastaus(str(answer[1]))
     elif 5 < current_round <= 10:
         # Haetaan keskivaikeaan kysymykseen data
         question = keski_kysymys()
 
         # Haetaan oikeaan vastaukseen data
-        answer = keski_oikea_vastaus(str(question))
+        answer = keski_oikea_vastaus(str(question[1]))
 
         # Haetaan väärä vastaus kolme kertaa
-        wrong_answer1 = keski_vaara_vastaus(answer)
-        wrong_answer2 = keski_vaara_vastaus(answer)
-        wrong_answer3 = keski_vaara_vastaus(answer)
+        wrong_answer1 = keski_vaara_vastaus(str(answer[0]))
+        wrong_answer2 = keski_vaara_vastaus(str(answer[0]))
+        wrong_answer3 = keski_vaara_vastaus(str(answer[0]))
     elif 10 < current_round <= 15:
         # Haetaan vaikeaan kysymykseen data
         question = vaikea_kysymys()
 
         # Haetaan oikeaan vastaukseen data
-        answer = vaikea_oikea_vastaus(str(question))
+        answer = vaikea_oikea_vastaus(str(question[0]))
 
         # Haetaan väärä vastaus kolme kertaa
-        wrong_answer1 = vaikea_vaara_vastaus(answer)
-        wrong_answer2 = vaikea_vaara_vastaus(answer)
-        wrong_answer3 = vaikea_vaara_vastaus(answer)
+        wrong_answer1 = vaikea_vaara_vastaus(str(question[0]))
+        wrong_answer2 = vaikea_vaara_vastaus(str(question[0]))
+        wrong_answer3 = vaikea_vaara_vastaus(str(question[0]))
 
     #Luodaan lista vastauksista
-    vastauslista = [answer, wrong_answer1, wrong_answer2, wrong_answer3]
+    vastauslista = [answer[0], wrong_answer1, wrong_answer2, wrong_answer3]
     #Sekoitetaan vastaukset
     random.shuffle(vastauslista)
 
@@ -160,11 +157,11 @@ while game_over == False:
     print(f"Round {current_round}: This question is worth ${100 * current_round}!")
     print("Your question is...")
     if current_round <= 5:
-        print(f"Which country is {question} located in?")
+        print(f"Which country is {question[0]} located in?")
     elif 5 < current_round <= 10:
-        print(f"Which ICAO code is for {question}?")
+        print(f"Which ICAO code is for {question[0]}?")
     elif 10 < current_round <= 15:
-        print(f"Which airport is {question} code for?")
+        print(f"Which airport is {question[0]} code for?")
     elif current_round == 16:
         print(f"You win! You have collected ${money}!")
         game_over = True
