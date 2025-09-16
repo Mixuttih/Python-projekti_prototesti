@@ -48,8 +48,10 @@ username = input('Enter your username: ')
 
 #Muuttuja joka määrittää kysytäänkö kysymyksiä
 game_over = False
+
+#Pelaajan raha ja edistyminen
 money = 0
-round = 0
+current_round = 0
 
 print(f"Alright, {username}! Your first question is...")
 
@@ -87,7 +89,8 @@ while game_over == False:
     if vastaus == "A":
         if vastauslista[0] == answer:
             print("Correct answer!")
-            reward = 100 * round
+            #Palkitaan pelaajaa oikeasta vastauksesta
+            reward = 100 * current_round
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
             print("Your next question is...")
@@ -97,7 +100,7 @@ while game_over == False:
     elif vastaus == "B":
         if vastauslista[1] == answer:
             print("Correct answer!")
-            reward = 100 * round
+            reward = 100 * current_round
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
             print("Your next question is...")
@@ -107,7 +110,7 @@ while game_over == False:
     elif vastaus == "C":
         if vastauslista[2] == answer:
             print("Correct answer!")
-            reward = 100 * round
+            reward = 100 * current_round
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
             print("Your next question is...")
@@ -117,7 +120,7 @@ while game_over == False:
     elif vastaus == "D":
         if vastauslista[3] == answer:
             print("Correct answer!")
-            reward = 100 * round
+            reward = 100 * current_round
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
             print("Your next question is...")
