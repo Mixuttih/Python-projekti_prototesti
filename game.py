@@ -122,7 +122,7 @@ while game_over == False:
         question = helppo_kysymys()
 
         #Haetaan oikeaan vastaukseen data
-        answer = helppo_oikea_vastaus(question)
+        answer = helppo_oikea_vastaus(str(question))
 
         #Haetaan väärä vastaus kolme kertaa
         wrong_answer1 = helppo_vaara_vastaus(answer)
@@ -133,7 +133,7 @@ while game_over == False:
         question = keski_kysymys()
 
         # Haetaan oikeaan vastaukseen data
-        answer = keski_oikea_vastaus(question)
+        answer = keski_oikea_vastaus(str(question))
 
         # Haetaan väärä vastaus kolme kertaa
         wrong_answer1 = keski_vaara_vastaus(answer)
@@ -144,7 +144,7 @@ while game_over == False:
         question = vaikea_kysymys()
 
         # Haetaan oikeaan vastaukseen data
-        answer = vaikea_oikea_vastaus(question)
+        answer = vaikea_oikea_vastaus(str(question))
 
         # Haetaan väärä vastaus kolme kertaa
         wrong_answer1 = vaikea_vaara_vastaus(answer)
