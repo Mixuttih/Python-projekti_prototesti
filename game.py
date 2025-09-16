@@ -14,7 +14,6 @@ yhteys = mysql.connector.connect(
 #Helppo kysymys: Haetaan tietokannasta kysyttävän lentokentän nimi randomisti
 def helppo_kysymys():
     sql = f"SELECT name, ident FROM airport ORDER BY RAND() LIMIT 1"
-    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -23,7 +22,6 @@ def helppo_kysymys():
 #Haetaan kysymyksen lentokenttää vastaavan maan nimi
 def helppo_oikea_vastaus(i):
     sql = f"SELECT name, iso_country FROM country WHERE iso_country in(SELECT iso_country FROM airport WHERE ident = '{i}')"
-    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -32,7 +30,6 @@ def helppo_oikea_vastaus(i):
 #Haetaan maa joka ei ole oikea vastaus
 def helppo_vaara_vastaus(i):
     sql = f"SELECT name FROM country WHERE NOT iso_country = '{i}' ORDER BY RAND() LIMIT 1"
-    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -43,7 +40,6 @@ def helppo_vaara_vastaus(i):
 #Keskivaikea kysymys: Haetaan tietokannasta kysyttävän lentokentän nimi randomisti
 def keski_kysymys():
     sql = f"SELECT name, ident FROM airport ORDER BY RAND() LIMIT 1"
-    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -52,7 +48,6 @@ def keski_kysymys():
 #Haetaan kysymyksen lentokenttää vastaavan ICAO -koodi
 def keski_oikea_vastaus(i):
     sql = f"SELECT ident FROM airport WHERE ident = '{i}'"
-    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -61,7 +56,6 @@ def keski_oikea_vastaus(i):
 #Haetaan ICAO -koodi joka ei ole oikea vastaus
 def keski_vaara_vastaus(i):
     sql = f"SELECT ident FROM airport WHERE NOT ident = '{i}' ORDER BY RAND() LIMIT 1"
-    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -72,7 +66,6 @@ def keski_vaara_vastaus(i):
 #Vaikea kysymys: Haetaan ICAO -koodi
 def vaikea_kysymys():
     sql = f"SELECT ident FROM airport ORDER BY RAND() LIMIT 1"
-    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -81,7 +74,6 @@ def vaikea_kysymys():
 #Haetaan kysymyksen koodia vastaavan lentokentän nimi
 def vaikea_oikea_vastaus(i):
     sql = f"SELECT name FROM airport WHERE ident = '{i}'"
-    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -90,7 +82,6 @@ def vaikea_oikea_vastaus(i):
 #Haetaan lentokentän nimi joka ei ole oikea vastaus
 def vaikea_vaara_vastaus(i):
     sql = f"SELECT name FROM airport WHERE NOT ident = '{i}' ORDER BY RAND() LIMIT 1"
-    print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchone()
@@ -176,18 +167,18 @@ while game_over == False:
 
     #Tarkastetaan vastasiko käyttäjä oikein
     if vastaus == "A":
-        if vastauslista[0] == answer:
+        if vastauslista[0] == answer[0]:
             print("Correct answer!")
             #Palkitaan pelaajaa oikeasta vastauksesta
             reward = 100 * current_round
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
         else:
-            print(f"Wrong answer, the correct answer was {answer}.")
+            print(f"Wrong answer, the correct answer was {answer[0]}.")
             game_over = True
 
     elif vastaus == "B":
-        if vastauslista[1] == answer:
+        if vastauslista[1] == answer[0]:
             print("Correct answer!")
             reward = 100 * current_round
             money = money + reward
@@ -197,7 +188,7 @@ while game_over == False:
             game_over = True
 
     elif vastaus == "C":
-        if vastauslista[2] == answer:
+        if vastauslista[2] == answer[0]:
             print("Correct answer!")
             reward = 100 * current_round
             money = money + reward
@@ -207,7 +198,7 @@ while game_over == False:
             game_over = True
 
     elif vastaus == "D":
-        if vastauslista[3] == answer:
+        if vastauslista[3] == answer[0]:
             print("Correct answer!")
             reward = 100 * current_round
             money = money + reward
