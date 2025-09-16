@@ -1,5 +1,4 @@
 import random
-
 import mysql.connector
 
 #SQL yhteys
@@ -52,7 +51,7 @@ def keski_kysymys():
         return rivi
     return None
 
-#Haetaan kysymyksen lentokenttää vastaavan ICAO koodi
+#Haetaan kysymyksen lentokenttää vastaavan ICAO -koodi
 def keski_oikea_vastaus(i):
     sql = f"SELECT ident FROM airport WHERE name = '{i}'"
     kursori = yhteys.cursor()
@@ -62,7 +61,7 @@ def keski_oikea_vastaus(i):
         return rivi
     return None
 
-#Haetaan ICAO koodi joka ei ole oikea vastaus
+#Haetaan ICAO -koodi joka ei ole oikea vastaus
 def keski_vaara_vastaus(i):
     sql = f"SELECT ident FROM airport WHERE NOT ident = '{i}' ORDER BY RAND() LIMIT 1"
     kursori = yhteys.cursor()
@@ -72,7 +71,7 @@ def keski_vaara_vastaus(i):
         return rivi
     return None
 
-#Vaikea kysymys
+#Vaikea kysymys: Haetaan ICAO -koodi
 def vaikea_kysymys():
     sql = f"SELECT ident FROM airport ORDER BY RAND() LIMIT 1"
     kursori = yhteys.cursor()
@@ -82,7 +81,7 @@ def vaikea_kysymys():
         return rivi
     return None
 
-#Haetaan kysymyksen lentokenttää vastaavan ICAO koodi
+#Haetaan kysymyksen koodia vastaavan lentokentän nimi
 def vaikea_oikea_vastaus(i):
     sql = f"SELECT name FROM airport WHERE ident = '{i}'"
     kursori = yhteys.cursor()
@@ -92,7 +91,7 @@ def vaikea_oikea_vastaus(i):
         return rivi
     return None
 
-#Haetaan ICAO koodi joka ei ole oikea vastaus
+#Haetaan lentokentän nimi joka ei ole oikea vastaus
 def vaikea_vaara_vastaus(i):
     sql = f"SELECT name FROM airport WHERE NOT name = '{i}' ORDER BY RAND() LIMIT 1"
     kursori = yhteys.cursor()
@@ -113,10 +112,11 @@ game_over = False
 money = 0
 current_round = 0
 
-print(f"Alright, {username}! Your first question is...")
+print(f"Welcome, {username}! Let's play!")
 
 #Loop joka kysyy kysymyksiä kunnes yksi menee väärin
 while game_over == False:
+    current_round += 1
     if current_round <= 5:
         #Haetaan helppoon kysymykseen data
         question = helppo_kysymys()
@@ -157,8 +157,8 @@ while game_over == False:
     random.shuffle(vastauslista)
 
     #Printataan kysymys ja vastaukset
-    current_round += 1
-    print(f"This question is worth ${100 * current_round}!")
+    print(f"Round {current_round}: This question is worth ${100 * current_round}!")
+    print("Your question is...")
     if current_round <= 5:
         print(f"Which country is {question} located in?")
     elif 5 < current_round <= 10:
@@ -185,7 +185,6 @@ while game_over == False:
             reward = 100 * current_round
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
-            print("Your next question is...")
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
@@ -196,7 +195,6 @@ while game_over == False:
             reward = 100 * current_round
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
-            print("Your next question is...")
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
@@ -207,7 +205,6 @@ while game_over == False:
             reward = 100 * current_round
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
-            print("Your next question is...")
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
@@ -218,7 +215,6 @@ while game_over == False:
             reward = 100 * current_round
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
-            print("Your next question is...")
         else:
             print(f"Wrong answer, the correct answer was {answer}.")
             game_over = True
@@ -226,5 +222,5 @@ while game_over == False:
     else:
         print("Error")
         game_over = True
-
-print("Game over, you lose, good day.")
+#Game over
+print("Game over.")
