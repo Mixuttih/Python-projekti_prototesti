@@ -184,7 +184,7 @@ while game_over == False:
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
         else:
-            print(f"Wrong answer, the correct answer was {answer}.")
+            print(f"Wrong answer, the correct answer was {answer[0]}.")
             game_over = True
 
     elif vastaus == "C":
@@ -194,7 +194,7 @@ while game_over == False:
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
         else:
-            print(f"Wrong answer, the correct answer was {answer}.")
+            print(f"Wrong answer, the correct answer was {answer[0]}.")
             game_over = True
 
     elif vastaus == "D":
@@ -204,7 +204,7 @@ while game_over == False:
             money = money + reward
             print(f"You have earned ${reward}! You now have ${money}!")
         else:
-            print(f"Wrong answer, the correct answer was {answer}.")
+            print(f"Wrong answer, the correct answer was {answer[0]}.")
             game_over = True
     #Jos pelaaja syöttää virheellisen vastauksen
     else:
